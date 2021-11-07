@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  php:
+    build: './docker/php'
+    volumes: ['./:/app']
+    working_dir: '/app'
+    ports: ['8000:8000']
+    user: '1000'
+    command: 'php -S 0.0.0.0:8000 -t /app/public /app/public/index.php'
