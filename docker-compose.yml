@@ -3,8 +3,12 @@ version: '3'
 services:
   php:
     build: './docker/php'
-    volumes: ['./:/app']
+    volumes:
+      - './:/app'
+      - './docker/php/zzz-xdebug.ini:/usr/local/etc/php/conf.d/zzz-xdebug.ini'
     working_dir: '/app'
     ports: ['8000:8000']
     user: '1000'
+    environment:
+      XDEBUG_CONFIG: 'discover_client_host=true client_host=172.17.0.1 log_level=0'
     command: 'php -S 0.0.0.0:8000 -t /app/public /app/public/index.php'
